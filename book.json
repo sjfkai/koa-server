@@ -1,0 +1,6 @@
+{ 
+  "gitbook": ">= 3.2.2",
+  "root": "./docs",
+  "title": "SLS ADMIN API DOCS",
+  "description": "sls admin api docs"
+}

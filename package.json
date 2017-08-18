@@ -1,0 +1,66 @@
+{
+  "name": "sls-admin-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "prestart": "npm run check-node-version",
+    "update-env": "npm run pull-config && npm run sync-db",
+    "check-node-version": "check-node-version --node \\>\\=$(cat .nvmrc)",
+    "lint": "eslint ./ --cache --ignore-path .gitignore",
+    "pull-config": "node bin/pull-config.js",
+    "sync-db": "node bin/sync-db",
+    "build-doc": "gitbook build ./ ./docs/_book",
+    "serve-doc": "gitbook serve ./ ./docs/_book",
+    "test": "nyc --reporter=html --reporter=text ava"
+  },
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@code.smartstudy.com:sunjunfeng/sls-admin-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "kcors": "^2.2.1",
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^2.5.0",
+    "koa-logger": "^3.0.1",
+    "koa-router": "^7.2.1",
+    "mysql": "^2.14.1",
+    "mysql2": "^1.4.0",
+    "sequelize": "^4.4.2",
+    "sequelize-auto": "^0.4.28"
+  },
+  "devDependencies": {
+    "ava": "^0.21.0",
+    "chai": "^4.1.1",
+    "check-node-version": "^2.1.0",
+    "eslint": "^4.4.0",
+    "eslint-config-airbnb-base": "^11.3.1",
+    "eslint-plugin-import": "^2.7.0",
+    "gitbook-cli": "^2.3.2",
+    "nyc": "^11.1.0",
+    "pre-commit": "^1.2.2"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "lines": 20,
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [
+      "src/schemas/*.js",
+      "src/routes/*.js",
+      "src/config/*"
+    ],
+    "all": true
+  },
+  "ava": {
+    "failWithoutAssertions": false
+  }
+}
